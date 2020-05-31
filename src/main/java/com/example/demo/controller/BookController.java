@@ -48,8 +48,9 @@ public class BookController {
 	    return ResponseEntity.ok(responsePayload.getPayload());
 	}
 
-	@DeleteMapping("/books/{id}")
-	public ResponseEntity<Map<String, String>> deleteBookById(@PathVariable long id) {
+	@DeleteMapping("/books")
+	public ResponseEntity<Map<String, String>> deleteBookById(@RequestBody Map<String, Long> req) {
+	    Long id = req.get("id");
 		bookService.deleteBook(id);
 		ResponsePayload responsePayload = new ResponsePayload("Книга удалена!");
 		return ResponseEntity.ok(responsePayload.getPayload());
